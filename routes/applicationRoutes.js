@@ -28,15 +28,16 @@ const express = require('express');
 const router = express.Router();
 const { applicationController, userController } = require('../controllers/applicationController');
 const upload = require('../config/multerConfig');
-
+const authMiddleware = require('../middleware/authMiddleware')
 // Route for submitting a new application
 router.post(
-  '/submit-application', 
+  '/submit-application',
+  // authMiddleware, // Add this to check if the user is logged in
   upload.fields([
     { name: 'videoIntroduction', maxCount: 1 },
     { name: 'resume', maxCount: 1 }
   ]),
-  applicationController.submitApplication
+  applicationController.submitApplication // Proceed to submit the application if authenticated
 );
 
 // Application routes

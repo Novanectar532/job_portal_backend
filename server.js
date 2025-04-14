@@ -74,7 +74,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Updated CORS configuration
 app.use(cors({
-  origin: 'https://job-portal-0dok.onrender.com', // Your frontend URL
+  origin: ['https://job-portal-0dok.onrender.com', 'http://localhost:5173'], // ⬅️ array of URLs
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
