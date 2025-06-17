@@ -65,7 +65,7 @@ const jobpost = require('./routes/Jobpost')
 
 const app = express();
 
-const port = process.env.PORT || 5000; // Make sure this matches your frontend fetch URL
+const port = process.env.PORT ; // Make sure this matches your frontend fetch URL
 
 console.log("MONGO_URI:", process.env.MONGO_URI ? "Defined" : "Undefined");
 
@@ -74,7 +74,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Updated CORS configuration
 app.use(cors({
-  origin: ['https://job-portal-0dok.onrender.com', 'http://localhost:5173'], // ⬅️ array of URLs
+  origin: ['https://job-portal-0dok.onrender.com', 'http://localhost:5173','http://localhost:5174','http://localhost:5175'], // ⬅️ array of URLs
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

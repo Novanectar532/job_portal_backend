@@ -386,6 +386,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const JobPost = require('../models/Jobpost');
 
 // Configure email transporter
 const transporter = nodemailer.createTransport({
@@ -410,6 +411,29 @@ const applicationController = {
         portfolioUrl,
         additionalInfo
       } = req.body;
+
+      const userId = req.body.userId;
+      const jobId = req.body.jobId;
+
+      const user = await User.findById(userId);
+      const job = await JobPost.findById(jobId);
+
+      if (user && job) {
+        // Update user's applied jobs
+        if (!user.applied.includes(jobId)) {
+          user.applied.push(jobId);
+          await user.save();
+        }
+
+        // Update job's student applicants
+        if (!job.studentApplied.includes(userId)) {
+          job.studentApplied.push(userId);
+          await job.save();
+        }
+      }
+
+
+    
 
       // Create new application document
       const application = new Application({
