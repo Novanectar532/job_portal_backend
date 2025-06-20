@@ -79,10 +79,39 @@ const deleteJobPost = async (req, res) => {
   }
 };
 
+
+const User = require('../models/User'); // adjust the path as needed
+
+// GET user with populated applied jobs
+const getUserWithAppliedJobs = async (req, res) => {
+  try {
+    const userId = req.params.user_id;
+    // const usere = await User.findById(userId)
+    //   console.log('user', usere)
+
+    const user = await User.findById(userId).populate({
+      path: "applied",              // field in User schema
+      model: "JobPost",             // must match the model name
+      
+    });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({ success: true, user });
+  } catch (err) {
+    console.error("Error populating applied jobs:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
 module.exports = {
   createJobPost,
   getAllJobPosts,
   getJobPostById,
   updateJobPost,
   deleteJobPost,
+  getUserWithAppliedJobs
 };

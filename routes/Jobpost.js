@@ -4,7 +4,8 @@ const {
     getAllJobPosts, 
     getJobPostById, 
     updateJobPost, 
-    deleteJobPost 
+    deleteJobPost,
+    getUserWithAppliedJobs 
 } = require('../controllers/jobController');
 const upload = require('../middleware/upload');
 
@@ -18,6 +19,8 @@ router.get('/jobpost', getAllJobPosts);
 
 // Get a single job post by ID
 router.get('/jobpost/:id', getJobPostById);
+
+router.get('/user/:user_id/applied-jobs', getUserWithAppliedJobs);
 
 // Update a job post by ID
 router.put('/jobpost/:id', upload.single('companyLogo'), updateJobPost);

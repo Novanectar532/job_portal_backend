@@ -71,6 +71,7 @@ console.log("MONGO_URI:", process.env.MONGO_URI ? "Defined" : "Undefined");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Updated CORS configuration
 app.use(cors({

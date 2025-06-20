@@ -49,6 +49,9 @@ router.post('/auth/signup', userController.signup);
 router.post('/auth/login', userController.login);
 router.get('/profile', userController.verifyToken, userController.getProfile);
 
+// get all the users
+router.get('/users', userController.getAllUsers);
+
 // Password reset routes
 router.post('/auth/forgot-password', userController.requestPasswordReset);
 router.get('/auth/reset-password/:token', userController.verifyResetToken);

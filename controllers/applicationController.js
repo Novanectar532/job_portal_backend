@@ -754,6 +754,23 @@ const userController = {
       res.status(401).json({ message: 'Token is not valid' });
     }
   },
+
+  //get all the user profile
+    getAllUsers: async (req, res) => {
+    try {
+      const users = await User.find().select('-password');
+      console.log('Fetched users:', users);
+      res.status(200).json({
+        success: true,
+        users
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error retrieving users'
+      });
+    }},
   
   getProfile: async (req, res) => {
     try {
